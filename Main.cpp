@@ -8,34 +8,44 @@ const int SIZE = 3;
 const int MIN = 100.00;
 const int MAX = 999.99;
 
-//Prototype for function that will test the Chair objects
-void testing();
-
 class Chair {
 private:
     int legs;
     double* prices;
 public:
-    // constructors
+    // Default Constructor: Intializes chair with random legs and random prices between $100 - $999
     Chair() {
         prices = new double[SIZE];
         legs = (rand() % 2) + 3;
         for (int i = 0; i < SIZE; i++)
             prices[i] = (rand() % (MAX - MIN + 1) + MIN) / 100.0;
     }
-    Chair(int l) {
+    Chair(int l, const int p[SIZE]) {
         prices = new double[SIZE];
         legs = l;
         for (int i = 0; i < SIZE; i++)
-            prices[i] = 0;
+            prices[i] = p[i];
+    }
+    //Clean up dynamic memory (avoid memory leaks)
+    ~Chair() {
+        delete[] prices;
     }
 
-    // setters and getters
-    void setLegs(int l) { legs = l; }
+    // setters (with validation) and getters
+    void setLegs(int l) {
+        if (l >= 3 && l <= 4) {
+            legs = l;
+        }
+        else {
+            cout << "INVALID" << endl;
+        }
+    }
     int getLegs() { return legs; }
 
     void setPrices(double p1, double p2, double p3) {
-        prices[0] = p1; prices[1] = p2; prices[2] = p3;
+        prices[0] = p1; 
+        prices[1] = p2; 
+        prices[2] = p3;
     }
 
     double getAveragePrices() {
