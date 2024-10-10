@@ -66,6 +66,7 @@ public:
 };
 
 int main() {
+    //randomness
     srand(static_cast<unsigned>(time(0)));
     cout << fixed << setprecision(2);
 
@@ -75,19 +76,17 @@ int main() {
     delete chairPtr;
 
     //chair with parameterized constructor
-    double prices[SIZE] = { 277.34, 932.84, 142.92 };
+    int prices[SIZE] = { 27734, 93284, 14292 };
     Chair* newChair = new Chair(3, prices);
     newChair->print();
     delete newChair;
-
-    
-
 
     //creating dynamic array of chair objects
     Chair* collection = new Chair[SIZE];
     for (int i = 0; i < SIZE; i++) {
         collection[i].print();
     }
+    // clean up to avoid memory leak
     delete[] collection;
    
     return 0;
