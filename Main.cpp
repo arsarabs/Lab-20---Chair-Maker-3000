@@ -5,8 +5,8 @@ using namespace std;
 
 //Constants
 const int SIZE = 3;
-const int MIN = 100.00;
-const int MAX = 999.99;
+const int MIN = 10000;
+const int MAX = 99999;
 
 class Chair {
 private:
@@ -66,31 +66,29 @@ public:
 };
 
 int main() {
+    srand(static_cast<unsigned>(time(0)));
     cout << fixed << setprecision(2);
 
-    //creating pointer to first chair object
+    //chair with default constructor
     Chair* chairPtr = new Chair;
-    chairPtr->setLegs(4);
-    chairPtr->setPrices(121.21, 232.32, 414.14);
     chairPtr->print();
+    delete chairPtr;
 
-    //creating dynamic chair object with constructor
-    Chair* livingChair = new Chair(3);
-    livingChair->setPrices(525.25, 434.34, 252.52);
-    livingChair->print();
-    delete livingChair;
-    livingChair = nullptr;
+    //chair with parameterized constructor
+    double prices[SIZE] = { 277.34, 932.84, 142.92 };
+    Chair* newChair = new Chair(3, prices);
+    newChair->print();
+    delete newChair;
+
+    
+
 
     //creating dynamic array of chair objects
     Chair* collection = new Chair[SIZE];
-    collection[0].setLegs(4);
-    collection[0].setPrices(441.41, 552.52, 663.63);
-    collection[1].setLegs(4);
-    collection[1].setPrices(484.84, 959.59, 868.68);
-    collection[2].setLegs(4);
-    collection[2].setPrices(626.26, 515.15, 757.57);
-    for (int i = 0; i < SIZE; i++)
+    for (int i = 0; i < SIZE; i++) {
         collection[i].print();
-
+    }
+    delete[] collection;
+   
     return 0;
 }
