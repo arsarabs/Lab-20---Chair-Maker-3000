@@ -2,7 +2,14 @@
 #include <iomanip>
 
 using namespace std;
+
+//Constants
 const int SIZE = 3;
+const int MIN = 100.00;
+const int MAX = 999.99;
+
+//Prototype for function that will test the Chair objects
+void testing();
 
 class Chair {
 private:
@@ -12,9 +19,9 @@ public:
     // constructors
     Chair() {
         prices = new double[SIZE];
-        legs = 0;
+        legs = (rand() % 2) + 3;
         for (int i = 0; i < SIZE; i++)
-            prices[i] = 0;
+            prices[i] = (rand() % (MAX - MIN + 1) + MIN) / 100.0;
     }
     Chair(int l) {
         prices = new double[SIZE];
